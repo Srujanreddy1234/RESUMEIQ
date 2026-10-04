@@ -1,0 +1,12 @@
+{% extends "app.html" %}
+{% from "partials/macros.html" import icon %}
+{% block content %}
+<div class="page-head">
+  <div><h1>Skill Gap</h1><p>What you have, what your target role needs, and what to learn first - with the evidence behind each requirement.</p></div>
+  <form id="role-form" class="flex flex-wrap" style="align-items:flex-end">
+    <div class="field"><label for="g-role">Target role</label><input class="input" id="g-role" maxlength="120" placeholder="e.g. Backend Developer"></div>
+    <button class="btn btn-primary" type="submit">{{ icon('refresh') }} Analyze</button>
+  </form>
+</div>
+<div id="gap"></div>
+{% endblock %}

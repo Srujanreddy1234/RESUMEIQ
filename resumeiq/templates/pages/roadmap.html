@@ -1,0 +1,25 @@
+{% extends "app.html" %}
+{% from "partials/macros.html" import icon %}
+{% block content %}
+<div class="page-head">
+  <div><h1>Learning Roadmap</h1><p>A phased plan built from your prioritised skill gaps, with curated resources and portfolio projects.</p></div>
+  <div class="page-actions"><button class="btn btn-ghost" id="regen-btn">{{ icon('refresh') }} New roadmap</button></div>
+</div>
+<section class="grid-4 mb-3" id="stats"></section>
+<div class="tabs" role="tablist">
+  <button class="tab" role="tab" aria-selected="true" aria-controls="p-plan" id="t-plan" data-tab="plan">Roadmap</button>
+  <button class="tab" role="tab" aria-selected="false" aria-controls="p-projects" id="t-projects" data-tab="projects" tabindex="-1">Project ideas</button>
+  <button class="tab" role="tab" aria-selected="false" aria-controls="p-resources" id="t-resources" data-tab="resources" tabindex="-1">Browse resources</button>
+</div>
+<section id="p-plan" class="tab-panel" role="tabpanel" aria-labelledby="t-plan"><div id="plan"></div></section>
+<section id="p-projects" class="tab-panel" role="tabpanel" aria-labelledby="t-projects" hidden><div id="projects"></div></section>
+<section id="p-resources" class="tab-panel" role="tabpanel" aria-labelledby="t-resources" hidden>
+  <form id="res-filter" class="card mb-3 flex flex-wrap" style="align-items:flex-end">
+    <div class="field"><label for="rf-skill">Skill</label><input class="input" id="rf-skill" placeholder="e.g. Docker"></div>
+    <div class="field"><label for="rf-type">Type</label><select class="select" id="rf-type"><option value="">Any</option><option value="documentation">Documentation</option><option value="course">Course</option><option value="book">Book</option><option value="certification">Certification</option><option value="practice">Practice</option><option value="youtube">YouTube</option></select></div>
+    <div class="field"><label for="rf-diff">Difficulty</label><select class="select" id="rf-diff"><option value="">Any</option><option value="beginner">Beginner</option><option value="intermediate">Intermediate</option><option value="advanced">Advanced</option></select></div>
+    <button class="btn btn-primary" type="submit">{{ icon('search') }} Filter</button>
+  </form>
+  <div class="card"><div id="resources"></div></div>
+</section>
+{% endblock %}

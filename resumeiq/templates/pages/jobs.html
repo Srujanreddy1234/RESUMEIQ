@@ -1,0 +1,32 @@
+{% extends "app.html" %}
+{% from "partials/macros.html" import icon %}
+{% block content %}
+<div class="page-head">
+  <div><h1>Jobs</h1><p>Real postings from public job APIs, scored against your profile with an explanation for every match.</p></div>
+</div>
+<form id="filters" class="card mb-3">
+  <div class="grid-4">
+    <div class="field"><label for="f-q">Job title / keywords</label><input class="input" id="f-q" name="q" maxlength="100" placeholder="e.g. backend developer"></div>
+    <div class="field"><label for="f-location">Location</label><input class="input" id="f-location" name="location" maxlength="100" placeholder="City, country or Remote"></div>
+    <div class="field"><label for="f-company">Company</label><input class="input" id="f-company" name="company" maxlength="100"></div>
+    <div class="field"><label for="f-skills">Skills (comma separated)</label><input class="input" id="f-skills" name="skills" maxlength="200" placeholder="Java, Docker"></div>
+    <div class="field"><label for="f-level">Experience level</label><select class="select" id="f-level" name="experience_level"><option value="">Any</option><option value="entry">Entry</option><option value="mid">Mid</option><option value="senior">Senior</option></select></div>
+    <div class="field"><label for="f-salary">Minimum salary</label><input class="input" id="f-salary" name="salary_min" type="number" min="0" step="1000" placeholder="e.g. 60000"></div>
+    <div class="field"><label for="f-posted">Date posted</label><select class="select" id="f-posted" name="posted_within"><option value="">Any time</option><option value="1">Last 24 hours</option><option value="7">Last 7 days</option><option value="30">Last 30 days</option></select></div>
+    <div class="field"><label for="f-sort">Sort by</label><select class="select" id="f-sort" name="sort"><option value="match">Best match</option><option value="date">Most recent</option></select></div>
+  </div>
+  <div class="flex flex-wrap mt-3 between">
+    <div class="flex flex-wrap">
+      <span class="label">Work type:</span>
+      <label class="checkbox"><input type="checkbox" name="work_type" value="remote"> Remote</label>
+      <label class="checkbox"><input type="checkbox" name="work_type" value="hybrid"> Hybrid</label>
+      <label class="checkbox"><input type="checkbox" name="work_type" value="onsite"> On-site</label>
+      <label class="checkbox"><input type="checkbox" name="saved" value="1"> Saved only</label>
+    </div>
+    <div class="flex"><button type="reset" class="btn btn-ghost">Clear</button><button class="btn btn-grad" id="search-btn" type="submit">{{ icon('search') }} Search jobs</button></div>
+  </div>
+</form>
+<div id="status" class="small muted mb-2"></div>
+<div id="results"></div>
+<div id="pager" class="flex mt-3" style="justify-content:center"></div>
+{% endblock %}

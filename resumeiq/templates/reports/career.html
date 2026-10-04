@@ -1,0 +1,19 @@
+{% extends "reports/base.html" %}
+{% set d = dashboard %}
+{% block title %}Career report{% endblock %}
+{% block body %}
+<h1>Career report{% if d.target_role %}: {{ d.target_role }}{% endif %}</h1>
+<p><span class="score-big">{{ d.readiness.score if d.readiness.score is not none else "-" }}%</span> career readiness</p>
+<table><thead><tr><th>Component</th><th>Value</th><th>Weight</th></tr></thead><tbody>
+{% for c in d.readiness.components %}<tr><td>{{ c.label }}</td><td>{{ c.value if c.value is not none else "n/a" }}</td><td>{{ (c.weight * 100)|round|int }}%</td></tr>{% endfor %}
+</tbody></table>
+<h2>Overview</h2>
+<table><tbody>
+<tr><th>Resume score</th><td>{{ d.stats.resume_score or "-" }}</td><th>Skills</th><td>{{ d.stats.skills }}</td></tr>
+<tr><th>Skill gaps</th><td>{{ d.stats.skill_gaps }}</td><th>Job matches (60%+)</th><td>{{ d.stats.job_matches }}</td></tr>
+<tr><th>Applications sent</th><td>{{ d.stats.applications_sent }}</td><th>Interviews</th><td>{{ d.stats.interviews }}</td></tr>
+<tr><th>Learning hours</th><td>{{ learning.hours_learned }}</td><th>Roadmap progress</th><td>{{ learning.roadmap_progress if learning.roadmap_progress is not none else "-" }}%</td></tr>
+</tbody></table>
+<h2>Top skill gaps</h2><ul>{% for g in d.top_gaps %}<li>{{ g.skill }} - level {{ g.current_level }} of {{ g.required_level }} ({{ g.importance }})</li>{% else %}<li>None</li>{% endfor %}</ul>
+<h2>Career insights</h2><ul>{% for i in insights %}<li>{{ i.text }}<br><small>Evidence: {{ i.evidence|join("; ") }}</small></li>{% endfor %}</ul>
+{% endblock %}

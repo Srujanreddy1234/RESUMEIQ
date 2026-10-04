@@ -1,0 +1,13 @@
+{% extends "app.html" %}
+{% from "partials/macros.html" import icon %}
+{% block content %}
+<div class="page-head">
+  <div><h1>Applications</h1><p>Drag cards between stages (or use the stage menu on each card) to track every application.</p></div>
+  <div class="page-actions">
+    <input class="input" id="board-search" type="search" placeholder="Filter by company or role" style="width:220px" aria-label="Filter applications">
+    <a class="btn btn-ghost" href="/analytics">{{ icon('chart') }} Analytics</a>
+    <button class="btn btn-grad" id="add-btn">{{ icon('plus') }} Add application</button>
+  </div>
+</div>
+<div id="board"></div>
+{% endblock %}

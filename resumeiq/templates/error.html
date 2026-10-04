@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+{% block title %}Error {{ code }}{% endblock %}
+{% block body %}
+<main class="legal center" style="padding-top:15vh">
+  <p class="grad-text" style="font-family:var(--font-head);font-size:4rem;font-weight:700">{{ code }}</p>
+  <h1>{{ "Page not found" if code == 404 else "Access denied" if code == 403 else "Something went wrong" }}</h1>
+  <p class="mt-2">{{ message if code != 500 else "An unexpected error occurred. It has been logged." }}</p>
+  <p class="mt-3"><a class="btn btn-primary" href="/">Go home</a></p>
+</main>
+{% endblock %}

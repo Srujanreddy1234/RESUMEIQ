@@ -1,0 +1,11 @@
+{% extends "reports/base.html" %}
+{% block title %}Skill gap report{% endblock %}
+{% block body %}
+<h1>Skill gap report: {{ gap.target_role }}</h1>
+<p><span class="score-big">{{ gap.readiness if gap.readiness is not none else "-" }}%</span> skill coverage</p>
+<p class="meta-line">{{ gap.data_note }}</p>
+<table><thead><tr><th>Skill</th><th>Status</th><th>Current / required</th><th>Importance</th><th>Priority</th><th>Evidence</th></tr></thead><tbody>
+{% for i in gap["items"] %}<tr><td>{{ i.skill }}</td><td class="{{ 'ok' if i.status == 'strong' else 'part' if i.status == 'needs_improvement' else 'no' }}">{{ i.status.replace("_", " ") }}</td>
+<td>{{ i.current_level }} / {{ i.required_level }}</td><td>{{ i.importance }}</td><td>{{ i.priority_rank or "-" }}</td><td>{{ i.evidence|join("; ") }}</td></tr>{% endfor %}
+</tbody></table>
+{% endblock %}

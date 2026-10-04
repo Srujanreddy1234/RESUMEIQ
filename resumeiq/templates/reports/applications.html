@@ -1,0 +1,15 @@
+{% extends "reports/base.html" %}
+{% set a = apps %}
+{% block title %}Application analytics{% endblock %}
+{% block body %}
+<h1>Application analytics</h1>
+{% if a.sample_note %}<p class="meta-line"><strong>Note:</strong> {{ a.sample_note }}</p>{% endif %}
+<table><tbody>
+<tr><th>Applications sent</th><td>{{ a.applications_sent }}</td><th>Responses</th><td>{{ a.responses }} ({{ a.response_rate if a.response_rate is not none else "-" }}%)</td></tr>
+<tr><th>Interviews</th><td>{{ a.interviews }} ({{ a.interview_rate if a.interview_rate is not none else "-" }}%)</td><th>Offers</th><td>{{ a.offers }}</td></tr>
+</tbody></table>
+<h2>By stage</h2><table><tbody>{% for k, v in a.by_stage.items() %}<tr><th>{{ k }}</th><td>{{ v }}</td></tr>{% endfor %}</tbody></table>
+<h2>By month</h2><table><tbody>{% for r in a.by_month %}<tr><th>{{ r.month }}</th><td>{{ r.count }}</td></tr>{% else %}<tr><td>No data</td></tr>{% endfor %}</tbody></table>
+<h2>By role</h2><table><tbody>{% for r in a.by_role %}<tr><th>{{ r.role }}</th><td>{{ r.count }}</td></tr>{% else %}<tr><td>No data</td></tr>{% endfor %}</tbody></table>
+<h2>By company</h2><table><tbody>{% for r in a.by_company %}<tr><th>{{ r.company }}</th><td>{{ r.count }}</td></tr>{% else %}<tr><td>No data</td></tr>{% endfor %}</tbody></table>
+{% endblock %}

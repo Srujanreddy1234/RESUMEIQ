@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% from "partials/macros.html" import icon %}
+{% block head %}<link rel="stylesheet" href="{{ url_for('static', filename='css/auth.css') }}?v={{ app_version }}">{% endblock %}
+{% block body %}
+<div class="auth">
+  <aside class="auth-aside">
+    <a class="brand" href="/" style="padding:0">
+      <span class="brand-mark">IQ</span>
+      <span><span class="brand-name">Resume<span>IQ</span></span><br><span class="brand-tag">Career Intelligence Platform</span></span>
+    </a>
+    <h1>Know exactly what stands between you and your <span class="grad-text">next role.</span></h1>
+    <p>Upload your resume, pick a target role, and get transparent scoring, real job matches, a prioritised skill-gap analysis and a learning roadmap - grounded in your actual data.</p>
+    <div class="feature-list">
+      <div class="feature"><span class="list-icon">{{ icon('scan') }}</span><div><h4>Explainable resume scoring</h4><p>Ten scored dimensions, each with the reason behind the number.</p></div></div>
+      <div class="feature"><span class="list-icon">{{ icon('target') }}</span><div><h4>Real job matching</h4><p>Live postings from public job APIs, with a breakdown of why each one matches.</p></div></div>
+      <div class="feature"><span class="list-icon">{{ icon('map') }}</span><div><h4>Personalised roadmap</h4><p>Prioritised skills, curated resources and portfolio projects.</p></div></div>
+      <div class="feature"><span class="list-icon">{{ icon('mic') }}</span><div><h4>Mock interviews</h4><p>Questions grounded in your resume, with structured feedback.</p></div></div>
+    </div>
+  </aside>
+  <main class="auth-main">
+    <div class="auth-card">{% block card %}{% endblock %}</div>
+  </main>
+</div>
+{% endblock %}
+{% block scripts %}<script type="module" src="{{ url_for('static', filename='js/pages/auth.js') }}?v={{ app_version }}"></script>{% endblock %}

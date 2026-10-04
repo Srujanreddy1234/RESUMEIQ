@@ -1,0 +1,14 @@
+{% extends "app.html" %}
+{% from "partials/macros.html" import icon %}
+{% block content %}
+<div class="page-head">
+  <div><h1>Analysis History</h1><p>Every resume analysis, ATS check and job-description match you've run.</p></div>
+  <div class="page-actions"><button class="btn btn-danger" id="clear-all">{{ icon('trash') }} Delete all history</button></div>
+</div>
+<form id="hist-filter" class="card mb-3 flex flex-wrap" style="align-items:flex-end">
+  <div class="field"><label for="h-kind">Type</label><select class="select" id="h-kind"><option value="">All</option><option value="resume">Resume analysis</option><option value="ats">ATS check</option><option value="jd_match">Job description match</option></select></div>
+  <div class="field"><label for="h-role">Target role</label><input class="input" id="h-role" placeholder="Filter by role"></div>
+  <button class="btn btn-primary" type="submit">{{ icon('search') }} Filter</button>
+</form>
+<div class="card"><div id="hist"></div><div id="hist-pager" class="flex mt-3" style="justify-content:center"></div></div>
+{% endblock %}

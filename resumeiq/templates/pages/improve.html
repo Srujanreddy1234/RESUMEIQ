@@ -1,0 +1,26 @@
+{% extends "app.html" %}
+{% from "partials/macros.html" import icon %}
+{% block content %}
+<div class="page-head">
+  <div><h1>Improve Resume</h1><p>Stronger bullets without invented achievements. Where a real result would help, you'll see a placeholder to fill in.</p></div>
+</div>
+<form id="improve-form" class="card mb-3">
+  <div class="form-grid">
+    <div class="field"><label for="i-version">Resume</label><select class="select" id="i-version"></select></div>
+    <div class="field"><label for="i-role">Target role (optional)</label><input class="input" id="i-role" maxlength="120"></div>
+    <div class="field full"><span class="label">What to improve</span>
+      <div class="seg" id="scope" role="group" aria-label="Scope">
+        <button type="button" data-scope="entire" aria-pressed="true">Entire resume</button>
+        <button type="button" data-scope="experience" aria-pressed="false">Experience</button>
+        <button type="button" data-scope="projects" aria-pressed="false">Projects</button>
+        <button type="button" data-scope="summary" aria-pressed="false">Summary</button>
+        <button type="button" data-scope="skills" aria-pressed="false">Skills section</button>
+        <button type="button" data-scope="bullet" aria-pressed="false">Single bullet</button>
+      </div></div>
+    <div class="field full" id="bullet-field" hidden><label for="i-bullet">Bullet to improve</label>
+      <textarea class="textarea" id="i-bullet" rows="3" maxlength="600" placeholder="e.g. Made a website using Python."></textarea></div>
+  </div>
+  <button class="btn btn-grad mt-3" id="improve-btn" type="submit">{{ icon('wand') }} Suggest improvements</button>
+</form>
+<div id="out"></div>
+{% endblock %}

@@ -1,0 +1,13 @@
+{% extends "app.html" %}
+{% from "partials/macros.html" import icon %}
+{% block content %}
+<div class="page-head">
+  <div><h1>Notifications</h1><p>Analysis results, learning milestones, application and interview reminders.</p></div>
+  <div class="page-actions">
+    <div class="seg" role="group" aria-label="Filter"><button type="button" data-filter="" aria-pressed="true">All</button><button type="button" data-filter="1" aria-pressed="false">Unread</button></div>
+    <button class="btn btn-ghost" id="read-all">{{ icon('check') }} Mark all read</button>
+    <a class="btn btn-ghost" href="/settings#notifications">{{ icon('gear') }} Preferences</a>
+  </div>
+</div>
+<div class="card"><div id="notifs"></div><div id="n-pager" class="flex mt-3" style="justify-content:center"></div></div>
+{% endblock %}

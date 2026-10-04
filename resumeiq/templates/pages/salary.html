@@ -1,0 +1,18 @@
+{% extends "app.html" %}
+{% from "partials/macros.html" import icon %}
+{% set charts = true %}
+{% block content %}
+<div class="page-head">
+  <div><h1>Salary Insights</h1><p>Salary <strong>data</strong> from real job postings is shown separately from any <strong>AI interpretation</strong>.</p></div>
+</div>
+<form id="sal-form" class="card mb-3">
+  <div class="grid-4">
+    <div class="field"><label for="s-role">Role</label><input class="input" id="s-role" name="role" required maxlength="120"></div>
+    <div class="field"><label for="s-location">Location</label><input class="input" id="s-location" name="location" maxlength="100"></div>
+    <div class="field"><label for="s-level">Experience</label><select class="select" id="s-level" name="experience_level"><option value="">All levels</option><option value="entry">Entry</option><option value="mid">Mid</option><option value="senior">Senior</option></select></div>
+    <div class="field"><label for="s-company">Company</label><input class="input" id="s-company" name="company" maxlength="100"></div>
+  </div>
+  <button class="btn btn-grad mt-3" id="sal-btn" type="submit">{{ icon('coins') }} Show salary data</button>
+</form>
+<div id="sal-out"></div>
+{% endblock %}

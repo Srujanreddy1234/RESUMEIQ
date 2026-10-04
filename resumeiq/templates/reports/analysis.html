@@ -1,0 +1,27 @@
+{% extends "reports/base.html" %}
+{% set a = analysis %}
+{% block title %}Resume analysis{% endblock %}
+{% block body %}
+<h1>{{ "ATS check" if a.kind == "ats" else "Job description match" if a.kind == "jd_match" else "Resume analysis" }}: {{ a.target_role }}</h1>
+<p class="meta-line">{{ a.created_at[:10] }}{% if a.resume %} · {{ a.resume.name }} v{{ a.resume.version_number }}{% endif %}{% if a.job_description %} · {{ a.job_description.title }}{% endif %}</p>
+<p><span class="score-big">{{ a.overall_score }}</span> / 100 {% if a.result.grade %}· {{ a.result.grade }}{% endif %}</p>
+<h2>Score breakdown</h2>
+<table><thead><tr><th>Component</th><th>Score</th><th>Why</th></tr></thead><tbody>
+{% for c in a.score_breakdown %}<tr><td>{{ c.label }}</td><td>{{ c.score }}</td><td>{{ c.explanation }}{% if c.suggestions %}<br><em>{{ c.suggestions|join(" ") }}</em>{% endif %}</td></tr>{% endfor %}
+</tbody></table>
+{% if a.kind == "resume" %}
+  {% if a.result.strengths %}<h2>Strengths</h2><ul>{% for s in a.result.strengths %}<li>{{ s }}</li>{% endfor %}</ul>{% endif %}
+  {% if a.result.weaknesses %}<h2>Areas to improve</h2><ul>{% for s in a.result.weaknesses %}<li>{{ s }}</li>{% endfor %}</ul>{% endif %}
+  {% if a.result.ai_feedback %}<h2>Written feedback (AI-generated)</h2><p>{{ a.result.ai_feedback.summary }}</p>{% endif %}
+  <h2>Skills</h2><p>{% for s in a.result.all_skills %}<span class="pill">{{ s }}</span>{% endfor %}</p>
+  <h3>Matching role requirements</h3><p>{% for s in a.result.matched_skills %}<span class="pill ok">{{ s }}</span>{% else %}None{% endfor %}</p>
+  <h3>Missing</h3><p>{% for s in a.result.missing_skills %}<span class="pill no">{{ s }}</span>{% else %}None{% endfor %}</p>
+{% else %}
+  <h2>Skills comparison</h2>
+  <table><thead><tr><th>Skill</th><th>Importance</th><th>Status</th><th>Note</th></tr></thead><tbody>
+  {% for s in a.result.skills %}<tr><td>{{ s.skill }}</td><td>{{ s.importance }}</td><td class="{{ 'ok' if s.status == 'matched' else 'part' if s.status == 'partial' else 'no' }}">{{ s.status|upper }}</td><td>{{ s.note }}</td></tr>{% endfor %}
+  </tbody></table>
+  <h3>Missing keywords</h3><p>{% for k in a.result.missing_keywords %}<span class="pill no">{{ k }}</span>{% else %}None{% endfor %}</p>
+  <p class="meta-line">{{ a.result.disclaimer }}</p>
+{% endif %}
+{% endblock %}

@@ -1,0 +1,9 @@
+{% extends "app.html" %}
+{% from "partials/macros.html" import icon %}
+{% set charts = true %}
+{% block content %}
+<div id="dash">
+  <div class="card mb-3"><div class="skeleton" style="height:120px"></div></div>
+  <div class="grid-4">{% for i in range(4) %}<div class="card"><div class="skeleton" style="height:60px"></div></div>{% endfor %}</div>
+</div>
+{% endblock %}

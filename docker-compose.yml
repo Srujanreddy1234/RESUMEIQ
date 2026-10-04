@@ -1,0 +1,36 @@
+# Local production-like stack:  docker compose up --build
+# With automatic HTTPS (set DOMAIN):  docker compose --profile https up --build
+services:
+  db:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_DB: resumeiq
+      POSTGRES_USER: resumeiq
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-change-me-locally}
+    volumes: [pgdata:/var/lib/postgresql/data]
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U resumeiq -d resumeiq"]
+      interval: 5s
+      retries: 10
+
+  web:
+    build: .
+    env_file: .env
+    environment:
+      DATABASE_URL: postgresql://resumeiq:${POSTGRES_PASSWORD:-change-me-locally}@db:5432/resumeiq
+      TRUST_PROXY: "1"
+    depends_on:
+      db: { condition: service_healthy }
+    ports: ["8000:8000"]
+    volumes: [uploads:/data/uploads]
+    restart: unless-stopped
+
+  caddy:
+    profiles: [https]
+    image: caddy:2-alpine
+    environment: { DOMAIN: "${DOMAIN:-localhost}" }
+    ports: ["80:80", "443:443"]
+    volumes: [./deploy/Caddyfile:/etc/caddy/Caddyfile:ro, caddy_data:/data]
+    depends_on: [web]
+
+volumes: { pgdata: {}, uploads: {}, caddy_data: {} }

@@ -1,0 +1,78 @@
+{% extends "base.html" %}
+{% from "partials/macros.html" import icon %}
+{% block body %}
+<a href="#main" class="sr-only">Skip to content</a>
+<div class="app">
+  <aside class="sidebar" id="sidebar" aria-label="Main navigation">
+    <a class="brand" href="{{ url_for('web.dashboard') }}">
+      <span class="brand-mark">IQ</span>
+      <span><span class="brand-name">Resume<span>IQ</span></span><br><span class="brand-tag">Career Intelligence</span></span>
+    </a>
+    <nav class="nav">
+      {% for group, items in nav %}
+      <div class="nav-group">
+        <div class="nav-group-label">{{ group }}</div>
+        {% for key, label, ic in items %}
+        <a href="{{ url_for('web.' ~ key) }}" {% if active == key %}aria-current="page"{% endif %}>{{ icon(ic) }}<span>{{ label }}</span></a>
+        {% endfor %}
+      </div>
+      {% endfor %}
+      {% if user.is_admin %}
+      <div class="nav-group">
+        <div class="nav-group-label">Admin</div>
+        <a href="{{ url_for('web.admin') }}" {% if active == 'admin' %}aria-current="page"{% endif %}>{{ icon('shield') }}<span>Admin Panel</span></a>
+      </div>
+      {% endif %}
+    </nav>
+    <div class="sidebar-foot">
+      {% if not ai_configured %}<div class="callout warn tiny">{{ icon('info', 'sm') }} AI is not configured; built-in analysis is used.</div>{% endif %}
+    </div>
+  </aside>
+  <div class="scrim" id="scrim"></div>
+
+  <div class="main">
+    <header class="topbar">
+      <button class="icon-btn menu-toggle" id="menu-toggle" aria-label="Open navigation" aria-controls="sidebar" aria-expanded="false">{{ icon('menu') }}</button>
+      <div class="search" role="search">
+        {{ icon('search') }}
+        <label for="global-search" class="sr-only">Search</label>
+        <input id="global-search" class="input" type="search" placeholder="Search jobs, skills, resources, applications..." autocomplete="off"
+               aria-controls="search-results" aria-expanded="false">
+        <div class="dropdown" id="search-results" hidden></div>
+      </div>
+      <div class="topbar-actions">
+        <button class="icon-btn" id="theme-toggle" aria-label="Toggle dark/light theme">{{ icon('sun') }}</button>
+        <a class="icon-btn" href="{{ url_for('web.notifications') }}" aria-label="Notifications">{{ icon('bell') }}<span class="count" id="notif-count" hidden>0</span></a>
+        <div class="rel">
+          <button class="user-chip" id="user-chip" aria-haspopup="menu" aria-expanded="false">
+            <span class="avatar" id="nav-avatar" data-has-avatar="{{ '1' if user.profile and user.profile.avatar_filename else '0' }}">{{ user.full_name[:1]|upper }}</span>
+            <span class="name">{{ user.full_name }}</span>
+          </button>
+          <div class="dropdown" id="user-menu" role="menu" hidden>
+            <div class="group-label">{{ user.email }}</div>
+            <a href="{{ url_for('web.profile') }}" role="menuitem">{{ icon('user') }} Career profile</a>
+            <a href="{{ url_for('web.settings') }}" role="menuitem">{{ icon('gear') }} Settings</a>
+            <a href="{{ url_for('web.privacy') }}" role="menuitem">{{ icon('shield') }} Privacy</a>
+            <button class="menu-item" id="logout-btn" role="menuitem">{{ icon('logout') }} Sign out</button>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main class="content" id="main" tabindex="-1">
+      {% block content %}{% endblock %}
+    </main>
+    <footer class="footer">
+      <span>ResumeIQ v{{ app_version }}</span>
+      <a href="{{ url_for('web.privacy') }}">Privacy</a>
+      <a href="{{ url_for('web.terms') }}">Terms</a>
+      <a href="/api/docs" target="_blank" rel="noopener">API</a>
+    </footer>
+  </div>
+</div>
+{% endblock %}
+{% block scripts %}
+{% if charts %}<script src="{{ url_for('static', filename='vendor/chart.umd.min.js') }}"></script>{% endif %}
+<script type="module" src="{{ url_for('static', filename='js/core/shell.js') }}?v={{ app_version }}"></script>
+<script type="module" src="{{ url_for('static', filename='js/pages/' ~ active ~ '.js') }}?v={{ app_version }}"></script>
+{% endblock %}

@@ -1,0 +1,70 @@
+/* Design tokens. Dark is the default theme; light is opt-in (or follows the system). */
+:root {
+  --font-head: "Space Grotesk", system-ui, sans-serif;
+  --font-body: "Plus Jakarta Sans", system-ui, sans-serif;
+  --radius-sm: 8px;
+  --radius: 14px;
+  --radius-lg: 20px;
+  --sidebar-w: 248px;
+  --topbar-h: 64px;
+  --gutter: 24px;
+  --shadow: 0 10px 30px rgba(0, 0, 0, .25);
+  --transition: 160ms ease;
+
+  --bg: #070a12;
+  --bg-glow-1: rgba(139, 92, 246, .16);
+  --bg-glow-2: rgba(20, 216, 184, .10);
+  --surface: rgba(17, 21, 35, .82);
+  --surface-2: #121829;
+  --surface-3: #1a2136;
+  --card: rgba(15, 20, 34, .78);
+  --border: rgba(148, 163, 255, .14);
+  --border-strong: rgba(148, 163, 255, .28);
+  --text: #eef1fb;
+  --muted: #98a2c3;
+  --faint: #6a7394;
+  --accent: #8b5cf6;
+  --accent-strong: #7c3aed;
+  --accent-soft: rgba(139, 92, 246, .16);
+  --teal: #14d8b8;
+  --teal-soft: rgba(20, 216, 184, .14);
+  --warn: #f5b94b;
+  --warn-soft: rgba(245, 185, 75, .14);
+  --danger: #ff5d7a;
+  --danger-soft: rgba(255, 93, 122, .14);
+  --info: #60a5fa;
+  --info-soft: rgba(96, 165, 250, .14);
+  --grad: linear-gradient(120deg, #a78bfa 0%, #8b5cf6 35%, #14d8b8 100%);
+  --grad-bar: linear-gradient(90deg, #8b5cf6, #14d8b8);
+  --focus: 0 0 0 3px rgba(139, 92, 246, .45);
+  color-scheme: dark;
+}
+
+:root[data-theme="light"] {
+  --bg: #f4f5fb;
+  --bg-glow-1: rgba(139, 92, 246, .10);
+  --bg-glow-2: rgba(20, 216, 184, .08);
+  --surface: rgba(255, 255, 255, .9);
+  --surface-2: #ffffff;
+  --surface-3: #eef0f8;
+  --card: rgba(255, 255, 255, .92);
+  --border: #e2e5f0;
+  --border-strong: #cfd4e6;
+  --text: #141827;
+  --muted: #586180;
+  --faint: #8790ab;
+  --accent: #6d3ef0;
+  --accent-strong: #5b2bdc;
+  --accent-soft: rgba(109, 62, 240, .10);
+  --teal: #0b9b83;
+  --teal-soft: rgba(11, 155, 131, .10);
+  --warn: #b7791f;
+  --warn-soft: rgba(183, 121, 31, .10);
+  --danger: #d6334f;
+  --danger-soft: rgba(214, 51, 79, .09);
+  --info: #2563eb;
+  --info-soft: rgba(37, 99, 235, .08);
+  --grad: linear-gradient(120deg, #7c3aed 0%, #6d3ef0 40%, #0b9b83 100%);
+  --shadow: 0 10px 30px rgba(20, 24, 39, .08);
+  color-scheme: light;
+}

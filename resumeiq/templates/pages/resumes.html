@@ -1,0 +1,28 @@
+{% extends "app.html" %}
+{% from "partials/macros.html" import icon %}
+{% block content %}
+<div class="page-head">
+  <div><h1>My Resumes</h1><p>Store multiple resumes, keep versions, and compare how they improve.</p></div>
+</div>
+<div class="grid" style="grid-template-columns:minmax(0,1fr)">
+  <section class="card">
+    <div class="card-head"><h3>{{ icon('upload') }} Upload a resume</h3><span class="small muted">PDF, DOCX or TXT · max 16 MB</span></div>
+    <form id="upload-form" class="stack">
+      <div class="dropzone" id="dropzone">
+        <input type="file" id="file" name="resume" accept=".pdf,.docx,.txt,application/pdf,application/vnd.openxmlformats-officedocument.wordprocessingml.document,text/plain" aria-label="Choose resume file">
+        {{ icon('file', 'xl') }}
+        <div class="dz-title" id="dz-title">Drop your resume here or click to browse</div>
+        <div class="small muted" id="dz-sub">Text-based files work best. Scanned images can't be read.</div>
+      </div>
+      <div class="flex flex-wrap">
+        <div class="field grow"><label for="rname">Name (optional)</label><input class="input" id="rname" name="name" maxlength="120" placeholder="e.g. Backend resume"></div>
+        <button class="btn btn-grad" type="submit" id="upload-btn" style="align-self:flex-end">{{ icon('upload') }} Upload</button>
+      </div>
+    </form>
+  </section>
+  <section class="card">
+    <div class="card-head"><h3>{{ icon('file') }} Your resumes</h3></div>
+    <div id="list"></div>
+  </section>
+</div>
+{% endblock %}

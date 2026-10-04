@@ -1,0 +1,10 @@
+{% extends "app.html" %}
+{% from "partials/macros.html" import icon %}
+{% block content %}
+<div class="page-head">
+  <div><h1>Career Profile</h1><p>Your career data in one place. Entries marked "from resume" sync from your primary resume; your manual edits are kept.</p></div>
+  <div class="page-actions"><a class="btn btn-ghost" href="/reports/career" target="_blank" rel="noopener">{{ icon('printer') }} Career report</a></div>
+</div>
+<div id="welcome" class="callout ai mb-3" hidden>{{ icon('sparkles') }} <div><strong>Welcome to ResumeIQ!</strong> Set your target career and preferences below, then <a href="/resumes">upload your resume</a>.</div></div>
+<div id="profile"></div>
+{% endblock %}

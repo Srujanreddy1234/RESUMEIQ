@@ -1,0 +1,36 @@
+{% extends "app.html" %}
+{% from "partials/macros.html" import icon %}
+{% block content %}
+<div class="page-head">
+  <div><h1>Interview Prep</h1><p>Questions grounded in your resume and target role, with feedback based only on what you write.</p></div>
+</div>
+<div class="tabs" role="tablist">
+  <button class="tab" role="tab" aria-selected="true" aria-controls="p-new" id="t-new" data-tab="new">New session</button>
+  <button class="tab" role="tab" aria-selected="false" aria-controls="p-session" id="t-session" data-tab="session" tabindex="-1">Current session</button>
+  <button class="tab" role="tab" aria-selected="false" aria-controls="p-history" id="t-history" data-tab="history" tabindex="-1">History</button>
+</div>
+<section id="p-new" class="tab-panel" role="tabpanel" aria-labelledby="t-new">
+  <form id="new-form" class="card">
+    <div class="form-grid">
+      <div class="field full"><span class="label">Mode</span>
+        <div class="seg" id="mode" role="group" aria-label="Mode">
+          <button type="button" data-mode="prep" aria-pressed="true">Practice questions</button>
+          <button type="button" data-mode="mock" aria-pressed="false">AI mock interview</button></div>
+        <span class="field-hint" id="mode-hint">Get a question set with what interviewers look for. Answer any question for feedback.</span></div>
+      <div class="field"><label for="n-role">Target role</label><input class="input" id="n-role" required maxlength="120"></div>
+      <div class="field"><label for="n-count">Number of questions</label><input class="input" id="n-count" type="number" min="1" max="15" value="6"></div>
+      <div class="field"><label for="n-version">Resume</label><select class="select" id="n-version"></select></div>
+      <div class="field"><label for="n-jd">Job description (optional)</label><select class="select" id="n-jd"><option value="">None</option></select></div>
+      <div class="field full"><span class="label">Categories</span>
+        <div class="flex flex-wrap" id="cats">
+          {% for key, label in [("technical","Technical"),("behavioral","Behavioral"),("hr","HR"),("project","Project-based"),("system_design","System design"),("dsa","DSA")] %}
+          <label class="checkbox"><input type="checkbox" value="{{ key }}" {% if key in ["technical","behavioral","project"] %}checked{% endif %}> {{ label }}</label>
+          {% endfor %}
+        </div></div>
+    </div>
+    <button class="btn btn-grad mt-3" id="start-btn" type="submit">{{ icon('mic') }} Start</button>
+  </form>
+</section>
+<section id="p-session" class="tab-panel" role="tabpanel" aria-labelledby="t-session" hidden><div id="session"></div></section>
+<section id="p-history" class="tab-panel" role="tabpanel" aria-labelledby="t-history" hidden><div class="card"><div id="history"></div></div></section>
+{% endblock %}

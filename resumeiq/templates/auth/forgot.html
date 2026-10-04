@@ -1,0 +1,16 @@
+{% extends "auth/layout.html" %}
+{% block title %}Forgot password{% endblock %}
+{% block card %}
+<h2>Reset your password</h2>
+<p>Enter your account email and we'll send you a reset link.</p>
+<form id="forgot-form" novalidate>
+  <div id="form-msg" class="form-msg" hidden role="alert"></div>
+  <div class="field">
+    <label for="email">Email</label>
+    <input class="input" id="email" name="email" type="email" autocomplete="email" required>
+    <span class="field-error"></span>
+  </div>
+  <button class="btn btn-primary btn-block" type="submit">Send reset link</button>
+</form>
+<p class="auth-switch"><a href="/login">Back to sign in</a></p>
+{% endblock %}

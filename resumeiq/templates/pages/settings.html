@@ -1,0 +1,46 @@
+{% extends "app.html" %}
+{% from "partials/macros.html" import icon %}
+{% block content %}
+<div class="page-head"><div><h1>Settings</h1><p>Account, appearance, notifications and your data.</p></div></div>
+<div class="grid-2">
+  <form class="card" id="account-form" novalidate>
+    <div class="card-head"><h3>{{ icon('user') }} Account</h3></div>
+    <div class="stack">
+      <div class="field"><label for="s-name">Full name</label><input class="input" id="s-name" name="full_name" maxlength="120" value="{{ user.full_name }}"><span class="field-error"></span></div>
+      <div class="field"><label for="s-email">Email</label><input class="input" id="s-email" name="email" type="email" value="{{ user.email }}"><span class="field-error"></span></div>
+      <div class="field"><label for="s-cur">Current password <span class="faint">(required to change email)</span></label><input class="input" id="s-cur" name="current_password" type="password" autocomplete="current-password"></div>
+      <button class="btn btn-primary" type="submit" id="account-btn">Save account</button>
+    </div>
+  </form>
+  <form class="card" id="password-form" novalidate>
+    <div class="card-head"><h3>{{ icon('shield') }} Change password</h3></div>
+    <div class="stack">
+      <div class="field"><label for="p-cur">Current password</label><input class="input" id="p-cur" name="current_password" type="password" autocomplete="current-password" required></div>
+      <div class="field"><label for="p-new">New password</label><input class="input" id="p-new" name="new_password" type="password" autocomplete="new-password" required minlength="8"><span class="field-error"></span></div>
+      <div class="field"><label for="p-conf">Confirm new password</label><input class="input" id="p-conf" name="confirm_password" type="password" autocomplete="new-password" required><span class="field-error"></span></div>
+      <p class="tiny faint">Changing your password signs you out on all other devices.</p>
+      <button class="btn btn-primary" type="submit" id="password-btn">Update password</button>
+    </div>
+  </form>
+  <section class="card">
+    <div class="card-head"><h3>{{ icon('sun') }} Appearance</h3></div>
+    <div class="seg" id="theme-seg" role="group" aria-label="Theme">
+      <button type="button" data-theme="dark">Dark</button><button type="button" data-theme="light">Light</button><button type="button" data-theme="system">System</button>
+    </div>
+    <p class="small mt-2">Dark is the default. Your choice is saved to your account and this browser.</p>
+  </section>
+  <section class="card" id="notifications">
+    <div class="card-head"><h3>{{ icon('bell') }} Notification preferences</h3></div>
+    <div class="stack" id="notif-prefs"></div>
+  </section>
+  <section class="card span-2">
+    <div class="card-head"><h3>{{ icon('shield') }} Privacy & data</h3><a class="small" href="/privacy">What we store and why</a></div>
+    <div class="list">
+      <div class="list-item"><div class="grow"><strong>Export your data</strong><p class="small">Download everything stored in your account as JSON.</p></div><a class="btn btn-ghost" href="/api/users/me/export">{{ icon('download') }} Export</a></div>
+      <div class="list-item"><div class="grow"><strong>Delete resumes</strong><p class="small">Remove individual resumes and their files from My Resumes.</p></div><a class="btn btn-ghost" href="/resumes">Manage resumes</a></div>
+      <div class="list-item"><div class="grow"><strong>Delete analysis history</strong><p class="small">Permanently delete every analysis, ATS check and JD match.</p></div><button class="btn btn-danger" id="del-history">Delete history</button></div>
+      <div class="list-item"><div class="grow"><strong>Delete account</strong><p class="small">Permanently delete your account, all uploaded files and every record. This cannot be undone.</p></div><button class="btn btn-danger" id="del-account">{{ icon('trash') }} Delete account</button></div>
+    </div>
+  </section>
+</div>
+{% endblock %}

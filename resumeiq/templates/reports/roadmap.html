@@ -1,0 +1,15 @@
+{% extends "reports/base.html" %}
+{% set rm = roadmap %}
+{% block title %}Learning roadmap{% endblock %}
+{% block body %}
+<h1>Learning roadmap: {{ rm.target_role }}</h1>
+<p>{{ rm.summary }} Progress: <strong>{{ rm.progress }}%</strong></p>
+{% for it in rm["items"] %}
+<h2>Phase {{ it.phase }}: {{ it.skill.name }} ({{ it.status.replace("_", " ") }}, ~{{ it.est_hours }}h)</h2>
+<p><strong>Why:</strong> {{ it.why }}</p>
+<h3>What to learn</h3><ul>{% for t in it.what_to_learn %}<li>{{ t }}</li>{% endfor %}</ul>
+{% if it.prerequisites %}<p><strong>Prerequisites:</strong> {% for p in it.prerequisites %}{{ p.skill }}{{ " (have)" if p.have }}{{ ", " if not loop.last }}{% endfor %}</p>{% endif %}
+<h3>Resources</h3><ul>{% for r in it.resources.beginner + it.resources.intermediate %}{% if not r.is_search_link %}<li><a href="{{ r.url }}">{{ r.title }}</a> - {{ r.platform }}, {{ r.difficulty }}{% if r.est_hours %}, ~{{ r.est_hours }}h{% endif %} [{{ r.status.replace("_", " ") }}]</li>{% endif %}{% endfor %}</ul>
+{% if it.project_ideas %}<p><strong>Projects:</strong> {{ it.project_ideas|join(", ") }}</p>{% endif %}
+{% endfor %}
+{% endblock %}

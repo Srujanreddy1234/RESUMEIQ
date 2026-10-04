@@ -1,0 +1,25 @@
+{% extends "auth/layout.html" %}
+{% block title %}Choose a new password{% endblock %}
+{% block card %}
+<h2>Choose a new password</h2>
+<p>This signs you out on every device.</p>
+<form id="reset-form" novalidate>
+  <div id="form-msg" class="form-msg" hidden role="alert"></div>
+  <div class="field">
+    <label for="password">New password</label>
+    <div class="input-group">
+      <input class="input" id="password" name="password" type="password" autocomplete="new-password" required minlength="8">
+      <button type="button" class="btn btn-ghost btn-icon btn-sm input-addon" data-toggle-password="password" aria-label="Show password">{{ icon('eye') }}</button>
+    </div>
+    <div class="strength" id="strength" data-score="0" aria-hidden="true"><span></span><span></span><span></span><span></span></div>
+    <span class="field-error"></span>
+  </div>
+  <div class="field">
+    <label for="confirm_password">Confirm new password</label>
+    <input class="input" id="confirm_password" name="confirm_password" type="password" autocomplete="new-password" required>
+    <span class="field-error"></span>
+  </div>
+  <button class="btn btn-primary btn-block" type="submit">Update password</button>
+</form>
+<p class="auth-switch"><a href="/login">Back to sign in</a></p>
+{% endblock %}

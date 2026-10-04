@@ -1,0 +1,5 @@
+# Terminates TLS (automatic Let's Encrypt certificates) and proxies to the app.
+{$DOMAIN} {
+	encode gzip
+	reverse_proxy web:8000
+}

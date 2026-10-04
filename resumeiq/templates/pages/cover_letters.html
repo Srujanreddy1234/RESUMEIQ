@@ -1,0 +1,27 @@
+{% extends "app.html" %}
+{% from "partials/macros.html" import icon %}
+{% block content %}
+<div class="page-head">
+  <div><h1>Cover Letters</h1><p>Generated only from facts in your resume and the job description. Placeholders mark details you should add yourself.</p></div>
+</div>
+<div class="split">
+  <section class="card">
+    <form id="cl-form" novalidate class="stack">
+      <div class="form-grid">
+        <div class="field"><label for="cl-company">Company *</label><input class="input" id="cl-company" name="company" required maxlength="200"><span class="field-error"></span></div>
+        <div class="field"><label for="cl-position">Position *</label><input class="input" id="cl-position" name="position" required maxlength="200"><span class="field-error"></span></div>
+        <div class="field"><label for="cl-version">Resume</label><select class="select" id="cl-version"></select></div>
+        <div class="field"><label for="cl-jd-id">Saved job description</label><select class="select" id="cl-jd-id"><option value="">None</option></select></div>
+        <div class="field full"><span class="label">Tone</span>
+          <div class="seg" id="tone" role="group" aria-label="Tone">
+            <button type="button" data-tone="formal" aria-pressed="true">Formal</button><button type="button" data-tone="concise" aria-pressed="false">Concise</button>
+            <button type="button" data-tone="enthusiastic" aria-pressed="false">Enthusiastic</button><button type="button" data-tone="technical" aria-pressed="false">Technical</button></div></div>
+        <div class="field full"><label for="cl-jd">Or paste the job description (optional)</label><textarea class="textarea" id="cl-jd" rows="5"></textarea></div>
+      </div>
+      <button class="btn btn-grad" id="cl-btn" type="submit">{{ icon('sparkles') }} Generate cover letter</button>
+    </form>
+    <div id="cl-out" class="mt-3"></div>
+  </section>
+  <section class="card"><div class="card-head"><h3>{{ icon('mail') }} Saved letters</h3></div><div id="cl-list"></div></section>
+</div>
+{% endblock %}

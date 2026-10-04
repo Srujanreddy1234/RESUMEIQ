@@ -1,0 +1,10 @@
+{% extends "app.html" %}
+{% from "partials/macros.html" import icon %}
+{% set charts = true %}
+{% block content %}
+<div class="page-head">
+  <div><h1>Admin Panel</h1><p>Platform health and usage. Aggregates only.</p></div>
+</div>
+<div class="admin-note mb-3">{{ icon('shield') }} Administrators can see counts, usage and error metadata. Resume files, resume text, analyses and answers are not exposed through any admin endpoint.</div>
+<div id="admin"></div>
+{% endblock %}

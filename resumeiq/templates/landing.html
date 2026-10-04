@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% from "partials/macros.html" import icon %}
+{% block title %}AI Career Intelligence{% endblock %}
+{% block head %}<link rel="stylesheet" href="{{ url_for('static', filename='css/auth.css') }}?v={{ app_version }}">{% endblock %}
+{% block body %}
+<header class="landing-nav">
+  <a class="brand" href="/" style="padding:0"><span class="brand-mark">IQ</span><span class="brand-name">Resume<span>IQ</span></span></a>
+  <div class="flex"><a class="btn btn-ghost" href="/login">Sign in</a><a class="btn btn-grad" href="/register">Get started</a></div>
+</header>
+<main>
+  <section class="hero">
+    <span class="badge accent">{{ icon('sparkles', 'sm') }} AI Career Intelligence Platform</span>
+    <h1>From resume to offer, with <span class="grad-text">evidence behind every insight.</span></h1>
+    <p>ResumeIQ tells you which real jobs you fit, what's missing, how to fix your resume, what to learn next and how to prepare for interviews. Every score shows the reason behind it.</p>
+    <div class="flex"><a class="btn btn-grad" href="/register">Create free account {{ icon('arrow') }}</a><a class="btn btn-ghost" href="/login">I already have an account</a></div>
+  </section>
+  <section class="flow">
+    <div class="card"><span class="list-icon">{{ icon('scan') }}</span><h3>Analyze</h3><p>Structured extraction and a transparent 10-part score with explanations.</p></div>
+    <div class="card"><span class="list-icon">{{ icon('target') }}</span><h3>Match</h3><p>Real postings from public job APIs, scored against your skills, experience and preferences.</p></div>
+    <div class="card"><span class="list-icon">{{ icon('graph') }}</span><h3>Close gaps</h3><p>Prioritised skills based on job frequency, importance and difficulty, plus a roadmap.</p></div>
+    <div class="card"><span class="list-icon">{{ icon('mic') }}</span><h3>Prepare</h3><p>Resume-grounded interview questions, mock interviews and an application tracker.</p></div>
+  </section>
+</main>
+<footer class="footer"><a href="/privacy">Privacy</a><a href="/terms">Terms</a><span>ResumeIQ v{{ app_version }}</span></footer>
+{% endblock %}

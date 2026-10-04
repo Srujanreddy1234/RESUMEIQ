@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+{% block title %}Privacy Policy{% endblock %}
+{% block head %}<link rel="stylesheet" href="{{ url_for('static', filename='css/auth.css') }}?v={{ app_version }}">{% endblock %}
+{% block body %}
+<main class="legal">
+  <p><a href="/">&larr; ResumeIQ</a></p>
+  <h1>Privacy Policy</h1>
+  <p class="small">Plain-language summary of what ResumeIQ stores, why, and how to delete it.</p>
+
+  <h2>What we store and why</h2>
+  <div class="table-wrap"><table class="table">
+    <thead><tr><th>Data</th><th>Why</th></tr></thead>
+    <tbody>
+      <tr><td>Account (name, email, bcrypt password hash)</td><td>To sign you in. We never store your password itself.</td></tr>
+      <tr><td>Profile & career preferences</td><td>To personalise job matching, gaps and roadmaps.</td></tr>
+      <tr><td>Uploaded resume files and their extracted text</td><td>To analyse, compare versions, and let you download them. Stored privately on the server with random filenames, never publicly accessible.</td></tr>
+      <tr><td>Analyses, job descriptions you paste, cover letters, interview answers</td><td>So you can reopen history and track progress.</td></tr>
+      <tr><td>Applications, saved jobs, learning progress, notifications</td><td>To run the tracker, analytics and reminders.</td></tr>
+      <tr><td>Operational logs (request path, status, latency, error type)</td><td>Reliability and security. Logs never contain passwords, API keys, tokens or resume content.</td></tr>
+      <tr><td>AI usage counts and approximate token totals</td><td>Cost control and abuse prevention.</td></tr>
+    </tbody>
+  </table></div>
+
+  <h2>AI processing</h2>
+  <p>When AI features are enabled, relevant text (for example resume text or a job description) is sent to Google's Gemini API to produce structured analysis. We instruct the model not to invent facts, validate every response against a schema, and fall back to deterministic analysis when AI is unavailable. Scores are computed by our own transparent rubric, not by the AI.</p>
+
+  <h2>Job data</h2>
+  <p>Job listings come from public job APIs (Remotive, Arbeitnow, and Adzuna when configured). We link to the original posting and do not create listings.</p>
+
+  <h2>Who can see your data</h2>
+  <p>Only you. Administrators see aggregate statistics (counts, usage, error rates) and cannot view resume content through the application.</p>
+
+  <h2>Your controls</h2>
+  <ul>
+    <li><strong>Delete a resume</strong> - My Resumes → Delete (removes the file and its versions).</li>
+    <li><strong>Delete analysis history</strong> - Analysis History or Settings → Privacy & data.</li>
+    <li><strong>Export your data</strong> - Settings → Privacy & data → Export (JSON).</li>
+    <li><strong>Delete your account</strong> - Settings → Delete account. This permanently removes your account, files and all associated records.</li>
+  </ul>
+
+  <h2>Security</h2>
+  <p>Passwords are hashed with bcrypt. Sessions use short-lived tokens in HTTP-only cookies with CSRF protection. Uploads are validated by extension and file signature, size-limited, stored outside any public directory, and never executed.</p>
+</main>
+{% endblock %}

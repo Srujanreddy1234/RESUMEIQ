@@ -1,0 +1,35 @@
+Priya Sharma
+priya.sharma@example.com | +1 415 555 0134 | github.com/priyasharma | linkedin.com/in/priyasharma
+
+SUMMARY
+Computer science graduate focused on backend development with Java and Python.
+
+EDUCATION
+Bachelor of Technology in Computer Science | State University
+2020 - 2024 | CGPA: 8.6/10
+
+EXPERIENCE
+Software Engineering Intern | Acme Corp
+May 2023 - Aug 2023
+• Developed REST APIs in Java for the internal billing service used by 4 teams
+• Wrote unit tests with JUnit, raising coverage from 52% to 78%
+• Worked on bug fixes in the
+  legacy reporting module
+• Responsible for documentation
+
+PROJECTS
+Campus Marketplace | Python, Flask, PostgreSQL
+• Built a marketplace web app where students list and buy used items
+• Made a website using Python
+Expense Tracker | JavaScript, React
+• Created a React app to track expenses with charts
+
+SKILLS
+Languages: Java, Python, JavaScript, SQL
+Tools: Git, Docker, Postman, Linux
+
+CERTIFICATIONS
+AWS Certified Cloud Practitioner
+
+ACHIEVEMENTS
+Winner, University Hackathon 2023

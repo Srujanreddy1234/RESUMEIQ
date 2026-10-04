@@ -1,0 +1,22 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% block title %}Report{% endblock %} · ResumeIQ</title>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700&family=Space+Grotesk:wght@600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/tokens.css') }}?v={{ app_version }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/print.css') }}?v={{ app_version }}">
+</head>
+<body class="report">
+  <div class="report-toolbar">
+    <span>ResumeIQ report - use your browser's <strong>Print → Save as PDF</strong></span>
+    <span><button class="btn" id="print-btn" type="button">Print / Save as PDF</button></span>
+  </div>
+  <div class="report-wrap">
+    <p class="meta-line">ResumeIQ · {{ user.full_name }} · generated {{ now_str if now_str else "" }}</p>
+    {% block body %}{% endblock %}
+    <p class="meta-line" style="margin-top:40px">Scores are estimates from a transparent rubric and are not a guarantee of hiring outcomes or of how any specific ATS will evaluate a resume.</p>
+  </div>
+  <script src="{{ url_for('static', filename='js/core/print.js') }}?v={{ app_version }}"></script>
+</body>
+</html>

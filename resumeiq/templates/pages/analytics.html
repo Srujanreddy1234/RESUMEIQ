@@ -1,0 +1,10 @@
+{% extends "app.html" %}
+{% from "partials/macros.html" import icon %}
+{% set charts = true %}
+{% block content %}
+<div class="page-head">
+  <div><h1>Analytics</h1><p>Your application funnel, resume progress and learning activity.</p></div>
+  <div class="page-actions"><a class="btn btn-ghost" href="/reports/applications" target="_blank" rel="noopener">{{ icon('printer') }} Export</a></div>
+</div>
+<div id="an"></div>
+{% endblock %}

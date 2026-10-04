@@ -1,0 +1,23 @@
+/* Print-friendly reports: "Save as PDF" from the browser. */
+body.report { background: #fff; color: #111; font-family: var(--font-body); }
+.report-wrap { max-width: 860px; margin: 0 auto; padding: 32px 28px 60px; }
+.report h1 { font-size: 1.7rem; color: #111; } .report h2 { font-size: 1.15rem; margin: 26px 0 10px; color: #111; border-bottom: 2px solid #8b5cf6; padding-bottom: 4px; }
+.report h3 { font-size: 1rem; margin: 14px 0 6px; color: #111; }
+.report p, .report li, .report td { color: #333; font-size: .92rem; }
+.report table { width: 100%; border-collapse: collapse; margin: 8px 0; }
+.report th, .report td { border: 1px solid #ddd; padding: 7px 9px; text-align: left; vertical-align: top; }
+.report th { background: #f4f2fb; font-size: .8rem; }
+.report .score-big { font-size: 2.6rem; font-weight: 700; font-family: var(--font-head); color: #6d3ef0; }
+.report .meta-line { color: #666; font-size: .85rem; }
+.report .pill { display: inline-block; border: 1px solid #ccc; border-radius: 6px; padding: 1px 7px; margin: 2px; font-size: .8rem; }
+.report .ok { color: #0b7d6a; } .report .no { color: #c0263f; } .report .part { color: #a86b00; }
+.report-toolbar { position: sticky; top: 0; background: #111827; color: #fff; padding: 10px 16px; display: flex; gap: 10px; justify-content: space-between; align-items: center; flex-wrap: wrap; }
+.report-toolbar a, .report-toolbar button { color: #fff; }
+.report-toolbar .btn { background: #8b5cf6; color: #fff; }
+@media print {
+  .report-toolbar { display: none; }
+  .report-wrap { padding: 0; }
+  .report h2 { break-after: avoid; }
+  .report tr, .report li { break-inside: avoid; }
+  a[href^="http"]::after { content: " (" attr(href) ")"; font-size: .75em; color: #666; }
+}

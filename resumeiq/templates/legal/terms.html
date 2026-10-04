@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% block title %}Terms of Use{% endblock %}
+{% block head %}<link rel="stylesheet" href="{{ url_for('static', filename='css/auth.css') }}?v={{ app_version }}">{% endblock %}
+{% block body %}
+<main class="legal">
+  <p><a href="/">&larr; ResumeIQ</a></p>
+  <h1>Terms of Use</h1>
+  <h2>Guidance, not guarantees</h2>
+  <p>ResumeIQ provides suggestions. Resume scores, ATS compatibility estimates, match percentages and salary figures are estimates. They are not a guarantee of how an employer or a particular applicant tracking system will evaluate you, or of any hiring outcome.</p>
+  <h2>Your content</h2>
+  <p>You are responsible for the accuracy of what you upload and submit. Don't add achievements, metrics or experience you don't have; ResumeIQ deliberately uses placeholders instead of inventing them.</p>
+  <h2>Acceptable use</h2>
+  <ul>
+    <li>Don't attempt to access other users' data or bypass rate limits and usage quotas.</li>
+    <li>Don't upload malicious files or content you don't have the right to use.</li>
+    <li>Automated scraping of the service is not permitted.</li>
+  </ul>
+  <h2>Third-party data</h2>
+  <p>Job listings and some salary data come from third-party APIs under their own terms; follow the link to the original posting before applying.</p>
+  <h2>Account termination</h2>
+  <p>You can delete your account at any time from Settings. Accounts that abuse the service may be deactivated.</p>
+</main>
+{% endblock %}

@@ -1,0 +1,20 @@
+{% extends "reports/base.html" %}
+{% set s = session %}
+{% block title %}Interview report{% endblock %}
+{% block body %}
+<h1>{{ "Mock interview" if s.mode == "mock" else "Interview practice" }}: {{ s.target_role }}</h1>
+<p class="meta-line">{{ s.created_at[:10] }} · {{ s.question_count }} questions{% if s.overall_score is not none %} · overall {{ s.overall_score }}/100{% endif %}</p>
+{% if s.summary and s.summary.scores %}
+<h2>Scores</h2><table><tbody>{% for k, v in s.summary.scores.items() %}<tr><th>{{ k.replace("_", " ") }}</th><td>{{ v }}</td></tr>{% endfor %}</tbody></table>
+<p class="meta-line">{{ s.summary.text_indicators.note }}</p>
+{% if s.summary.missing_concepts %}<h3>Missing concepts</h3><ul>{% for m in s.summary.missing_concepts %}<li>{{ m }}</li>{% endfor %}</ul>{% endif %}
+{% if s.summary.improvements %}<h3>Suggested improvements</h3><ul>{% for m in s.summary.improvements %}<li>{{ m }}</li>{% endfor %}</ul>{% endif %}
+{% endif %}
+<h2>Questions</h2>
+{% for q in s.questions %}
+<h3>{{ loop.index }}. {{ q.question }} <small>({{ q.category }})</small></h3>
+{% if q.why_asked %}<p><strong>Why asked:</strong> {{ q.why_asked }}</p>{% endif %}
+{% if q.strong_answer_points %}<p><strong>Strong answer:</strong> {{ q.strong_answer_points|join("; ") }}</p>{% endif %}
+{% if q.answer %}<p><strong>Your answer:</strong> {{ q.answer.answer_text }}</p><p><strong>Score:</strong> {{ q.answer.overall_score }}/100 - {{ q.answer.feedback }}</p>{% endif %}
+{% endfor %}
+{% endblock %}

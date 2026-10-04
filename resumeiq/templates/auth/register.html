@@ -1,0 +1,37 @@
+{% extends "auth/layout.html" %}
+{% block title %}Create account{% endblock %}
+{% block card %}
+<h2>Create your account</h2>
+<p>Free, private by default. You can delete your data at any time.</p>
+<form id="register-form" novalidate>
+  <div id="form-msg" class="form-msg" hidden role="alert"></div>
+  <div class="field">
+    <label for="full_name">Full name</label>
+    <input class="input" id="full_name" name="full_name" autocomplete="name" required minlength="2" maxlength="120">
+    <span class="field-error"></span>
+  </div>
+  <div class="field">
+    <label for="email">Email</label>
+    <input class="input" id="email" name="email" type="email" autocomplete="email" required>
+    <span class="field-error"></span>
+  </div>
+  <div class="field">
+    <label for="password">Password</label>
+    <div class="input-group">
+      <input class="input" id="password" name="password" type="password" autocomplete="new-password" required minlength="8" aria-describedby="pw-hint">
+      <button type="button" class="btn btn-ghost btn-icon btn-sm input-addon" data-toggle-password="password" aria-label="Show password">{{ icon('eye') }}</button>
+    </div>
+    <div class="strength" id="strength" data-score="0" aria-hidden="true"><span></span><span></span><span></span><span></span></div>
+    <span class="field-hint" id="pw-hint">At least 8 characters, including a letter and a number.</span>
+    <span class="field-error"></span>
+  </div>
+  <div class="field">
+    <label for="confirm_password">Confirm password</label>
+    <input class="input" id="confirm_password" name="confirm_password" type="password" autocomplete="new-password" required>
+    <span class="field-error"></span>
+  </div>
+  <p class="tiny muted">By creating an account you agree to the <a href="/terms">Terms</a> and acknowledge the <a href="/privacy">Privacy Policy</a>.</p>
+  <button class="btn btn-grad btn-block" type="submit">Create account {{ icon('arrow') }}</button>
+</form>
+<p class="auth-switch">Already have an account? <a href="/login">Sign in</a></p>
+{% endblock %}

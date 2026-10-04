@@ -1,0 +1,27 @@
+{% extends "app.html" %}
+{% from "partials/macros.html" import icon %}
+{% block content %}
+<div class="page-head">
+  <div><h1>Job Matcher</h1><p>Paste a job description to extract its requirements and see exactly how your resume compares.</p></div>
+  <div class="page-actions"><a class="btn btn-ghost" href="/jobs">{{ icon('briefcase') }} Browse live jobs</a></div>
+</div>
+<div class="tabs" role="tablist">
+  <button class="tab" role="tab" aria-selected="true" aria-controls="p-jd" id="t-jd" data-tab="jd">Analyze job description</button>
+  <button class="tab" role="tab" aria-selected="false" aria-controls="p-matches" id="t-matches" data-tab="matches" tabindex="-1">Your top matches</button>
+  <button class="tab" role="tab" aria-selected="false" aria-controls="p-saved" id="t-saved" data-tab="saved" tabindex="-1">Saved descriptions</button>
+</div>
+<section id="p-jd" class="tab-panel" role="tabpanel" aria-labelledby="t-jd">
+  <form id="jd-form" class="card mb-3" novalidate>
+    <div class="form-grid">
+      <div class="field"><label for="jd-title">Job title</label><input class="input" id="jd-title" name="title" required maxlength="200" placeholder="e.g. Backend Engineer"><span class="field-error"></span></div>
+      <div class="field"><label for="jd-company">Company (optional)</label><input class="input" id="jd-company" name="company" maxlength="200"></div>
+      <div class="field"><label for="jd-version">Compare with resume</label><select class="select" id="jd-version"></select></div>
+      <div class="field full"><label for="jd-text">Job description</label><textarea class="textarea" id="jd-text" name="text" rows="10" placeholder="Paste the full job posting, including requirements and nice-to-haves."></textarea><span class="field-error"></span></div>
+    </div>
+    <button class="btn btn-grad mt-3" id="jd-btn" type="submit">{{ icon('target') }} Analyze & compare</button>
+  </form>
+  <div id="jd-out"></div>
+</section>
+<section id="p-matches" class="tab-panel" role="tabpanel" aria-labelledby="t-matches" hidden><div id="matches"></div></section>
+<section id="p-saved" class="tab-panel" role="tabpanel" aria-labelledby="t-saved" hidden><div class="card"><div id="saved"></div></div></section>
+{% endblock %}

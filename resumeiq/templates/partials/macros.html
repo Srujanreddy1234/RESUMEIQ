@@ -1,0 +1,8 @@
+{% macro icon(name, cls="") %}<svg class="ico {{ cls }}" aria-hidden="true"><use href="#i-{{ name }}"></use></svg>{% endmacro %}
+
+{% macro page_head(title, subtitle="") %}
+<div class="page-head">
+  <div><h1>{{ title }}</h1>{% if subtitle %}<p>{{ subtitle }}</p>{% endif %}</div>
+  <div class="page-actions">{{ caller() if caller else "" }}</div>
+</div>
+{% endmacro %}
