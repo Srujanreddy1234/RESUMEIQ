@@ -103,7 +103,7 @@ class Config:
     SMTP_USER = os.getenv("SMTP_USER", "")
     SMTP_PASSWORD = os.getenv("SMTP_PASSWORD", "")
     SMTP_FROM = os.getenv("SMTP_FROM", "no-reply@resumeiq.local")
-    APP_BASE_URL = os.getenv("APP_BASE_URL", "http://localhost:5000")
+    APP_BASE_URL = os.getenv("APP_BASE_URL") or os.getenv("RENDER_EXTERNAL_URL") or "http://localhost:5000"
 
     LOG_LEVEL = os.getenv("LOG_LEVEL", "INFO")
     LOG_JSON = _bool("LOG_JSON", True)

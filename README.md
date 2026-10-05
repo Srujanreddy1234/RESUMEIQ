@@ -142,6 +142,16 @@ docker compose up --build                               # app + PostgreSQL on :8
 DOMAIN=resumeiq.example.com docker compose --profile https up --build   # + Caddy with automatic HTTPS
 ```
 
+### Render (one click)
+
+[![Deploy to Render](https://render.com/images/deploy-to-render-button.svg)](https://render.com/deploy?repo=https://github.com/Srujanreddy1234/RESUMEIQ)
+
+[render.yaml](render.yaml) creates the Docker web service and a PostgreSQL database, generates `SECRET_KEY`/`JWT_SECRET`,
+and prompts for the optional `GEMINI_API_KEY` and Adzuna keys. On the free plan the instance sleeps when idle and
+uploaded files don't survive a redeploy (switch to `starter` and enable the disk in `render.yaml` to keep them).
+
+### Notes
+
 The container runs as a non-root user, applies migrations and seeds on start
 ([deploy/entrypoint.sh](deploy/entrypoint.sh)), serves with Gunicorn (gthread), stores uploads on a volume,
 and has a Docker `HEALTHCHECK` against `GET /health`. For PaaS (Railway, Render, Fly), use the Dockerfile,

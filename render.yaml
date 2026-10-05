@@ -1,0 +1,47 @@
+# Render Blueprint: one Docker web service + managed PostgreSQL.
+# Deploy: https://render.com/deploy?repo=https://github.com/Srujanreddy1234/RESUMEIQ
+#
+# Free plan notes: the instance sleeps after ~15 min idle (first request takes ~1 min), the free
+# database expires after 30 days, and uploaded files are lost on redeploy (extracted text and analyses
+# stay in PostgreSQL). For persistent uploads switch the web service to `plan: starter` and uncomment `disk`.
+services:
+  - type: web
+    name: resumeiq
+    runtime: docker
+    plan: free
+    dockerfilePath: ./Dockerfile
+    healthCheckPath: /health
+    autoDeploy: true
+    # disk:
+    #   name: uploads
+    #   mountPath: /data/uploads
+    #   sizeGB: 1
+    envVars:
+      - key: DATABASE_URL
+        fromDatabase:
+          name: resumeiq-db
+          property: connectionString
+      - key: SECRET_KEY
+        generateValue: true
+      - key: JWT_SECRET
+        generateValue: true
+      - key: TRUST_PROXY
+        value: "true"
+      - key: COOKIE_SECURE
+        value: "true"
+      - key: WEB_CONCURRENCY
+        value: "1"          # single worker fits the 512 MB free instance; threads handle concurrency
+      - key: GUNICORN_THREADS
+        value: "8"
+      - key: GEMINI_API_KEY
+        sync: false         # optional; Render prompts for it. Leave blank to use rule-based fallbacks
+      - key: ADZUNA_APP_ID
+        sync: false
+      - key: ADZUNA_APP_KEY
+        sync: false
+
+databases:
+  - name: resumeiq-db
+    plan: free
+    databaseName: resumeiq
+    user: resumeiq
